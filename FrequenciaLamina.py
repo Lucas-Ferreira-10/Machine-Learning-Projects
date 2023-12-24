@@ -1,10 +1,7 @@
 import pandas as pd
 import numpy as np
-import T
-
-
-# Leitura dos dados iniciais
-df = concatenate_data()
+import TratamentoDados
+import TurnoDeRega
 
 def Freq_Lamina_Irrig(df):
   '''
@@ -20,25 +17,25 @@ def Freq_Lamina_Irrig(df):
 
   '''
   # Corrigindo colunas com NaN e normalizando com a média
-  data = limpando_dados(df)
+  data = TratamentoDados.limpando_dados(df)
 
   # Selecionando as colunas de interesse
-  data = select_data(data)
+  data = TratamentoDados.select_data(data)
 
   # Calculando a Temperatura e Umidade do Ar Média
-  vetor_temp_media, vetor_umid_media = calculate_media(data)
+  vetor_temp_media, vetor_umid_media = TurnoDeRega.calculate_media(data)
 
   # Calculando a Evapotranspiração de Referência (ETo)
-  eto = evapo_benavides_lopez(vetor_temp_media,vetor_umid_media)
+  eto = TurnoDeRega.evapo_benavides_lopez(vetor_temp_media,vetor_umid_media)
 
   # Calculando a Evapotranspiração Máxima da Cultura (ETc)
-  etc = evapo_max_cultura(eto)
+  etc = TurnoDeRega.evapo_max_cultura(eto)
 
   # Calculando a Frequência de Irrigação
-  f = freq_irrigation(etc)
+  f = TurnoDeRega.freq_irrigation(etc)
 
   # Calculando Lâmina Bruta de Irrigação (Lâmina de Água)
-  lamina_bruta = lam_bruta_atualizada(etc)
+  lamina_bruta = TurnoDeRega.lam_bruta_atualizada(etc)
 
   # Dados Finais
   data = {'temp_media':vetor_temp_media,'umid_media':vetor_umid_media,
@@ -46,6 +43,10 @@ def Freq_Lamina_Irrig(df):
   data = pd.DataFrame(data)
 
   return data
+
+
+# Leitura dos dados iniciais
+df = TratamentoDados.concatenate_data()
 
 data = Freq_Lamina_Irrig(df)
 data.head()
