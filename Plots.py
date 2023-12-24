@@ -16,7 +16,7 @@ plt.ylabel('Frequência de Irrigação Real')
 plt.savefig('matriz_confusao_frequencia.png')
 plt.show()
 
-
+#
 y2 = np.array(y2_test['Lâmina de Água'])
 y2_pred = modelo_lamina.predict(X2_test)
 non_matching_condition = np.isclose(y2, y2_pred, atol=1e-2)
