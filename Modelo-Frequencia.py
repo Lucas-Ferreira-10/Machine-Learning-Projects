@@ -1,6 +1,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error
+import pandas as pd
 
 # Prevendo a Frequência de irrigação
 X1 = data[['temp_media', 'umid_media']]
