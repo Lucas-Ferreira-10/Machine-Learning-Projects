@@ -1,6 +1,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error
+import pandas as pd
 
 # Prevendo a Lâmina de Água
 X2 = data[['temp_media', 'umid_media']]
